@@ -1,0 +1,8 @@
+/viz_aire_cdmx/data/db_conexion.py
+viz_aire_cdmx/__pycache__/
+viz_aire_cdmx/apps/__pycache__/
+viz_aire_cdmx/common/__pycache__/
+viz_aire_cdmx/script/
+viz_aire_cdmx/data/datos_d.csv
+viz_aire_cdmx/data/datos_p.csv
+.idea

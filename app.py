@@ -2,7 +2,7 @@ import dash
 import dash_html_components as html
 
 from dash.dependencies import Input, Output
-from .apps import concentraciones, pronostico
+from apps import concentraciones, pronostico
 
 # Se inicia a app en dash
 app= dash.Dash(__name__)

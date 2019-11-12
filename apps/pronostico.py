@@ -10,9 +10,9 @@ import locale
 from datetime import timedelta
 
 # Funciones y datos necesarios
-from ..common.conversion_indice import indice_O3, indice_PM10, convertir_ppm, no_operar_nan
-from ..common.diccionarios import dic_etiquetas, dic_colores, dic_colores_gauge, color_leyenda_calidad_aire
-from ..data.db_conexion import df
+from common.conversion_indice import indice_O3, indice_PM10, convertir_ppm, no_operar_nan
+from common.diccionarios import dic_etiquetas, dic_colores, dic_colores_gauge, color_leyenda_calidad_aire
+from data.db_conexion import df
 
 # -----------------------------------------ESTRUCTURACIÓN DEL DATAFRAME------------------------------------------------#
 
@@ -86,10 +86,10 @@ color_pronostico, leyenda_pronostico = color_leyenda_calidad_aire(valor_indice_p
 # -----------------------------------------MAPA DE CONTAMINACIÓN POR AGEB---------------------------------------------#
 # Esto se realizó con datos viejos, para poder mostrar un demo en el tablero
 
-with open('viz_aire_cdmx/data/o3_ageb.json') as geofile:
+with open('data/o3_ageb.json') as geofile:
     jfile = json.load(geofile)
 
-geodf = gpd.read_file('viz_aire_cdmx/data/O3_ageb.shp')
+geodf = gpd.read_file('data/O3_ageb.shp')
 
 
 # Revisar la estructura del geojson y corregirla de ser necesario

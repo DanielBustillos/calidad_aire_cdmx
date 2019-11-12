@@ -8,9 +8,9 @@ import locale
 from datetime import timedelta
 
 # Funciones y datos necesarios
-from ..common.conversion_indice import convertir_ppb
-from ..common.diccionarios import dic_etiquetas, dic_colores
-from ..data.db_conexion import df
+from common.conversion_indice import convertir_ppb
+from common.diccionarios import dic_etiquetas, dic_colores
+from data.db_conexion import df
 
 # Se establece el formato de hora local en español (México)
 locale.setlocale(locale.LC_TIME, 'es_MX.utf8')

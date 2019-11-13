@@ -341,13 +341,14 @@ data_tabla = go.Table(header={'values': valores_header,
                                       'width': 2}},
                       columnwidth=[18, 9, 73])
 
-layout_tabla = go.Layout(margin={'l': 5,
+layout_tabla = go.Layout(paper_bgcolor='#f9f9f9',
+                         plot_bgcolor='#f9f9f9',
+                         autosize=True,
+                         margin={'l': 5,
                                  'r': 5,
                                  't': 5,
-                                 'b': 5},
-                         paper_bgcolor='#f9f9f9',
-                         plot_bgcolor='#f9f9f9',
-                         autosize=True)
+                                 'b': 5,
+                                 'autoexpand': False})
 
 figure_tabla = {'data': [data_tabla],
                 'layout': layout_tabla}

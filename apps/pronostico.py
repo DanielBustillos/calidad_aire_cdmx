@@ -131,11 +131,11 @@ data_mapa = go.Choroplethmapbox(z=z,
                                 geojson=jdata,
                                 hoverinfo='all',
                                 marker_line_width=0.1,
-                                marker_opacity=0.3)
+                                marker_opacity=0.5)
 
 layout_mapa = go.Layout(title_x=0.5,
                         width=700,
-                        height=750,
+                        height=700,
                         mapbox={'center': {'lat': 19.546232,
                                            'lon': -99.035067},
                                 'style': 'carto-positron',
@@ -143,7 +143,7 @@ layout_mapa = go.Layout(title_x=0.5,
                         margin={'l': 0,
                                 'r': 0,
                                 't': 0,
-                                'b': 50})
+                                'b': 0})
 
 figure_mapa = go.Figure(data=data_mapa,
                         layout=layout_mapa)
@@ -429,15 +429,6 @@ estilo_graficas = {'responsive': True,
 # layout= html.Div([dcc.Graph(id='indices', figure=figure_lineas, animate=True, className='indices', config=estilo_graficas),
 #                   dcc.Graph(id='indicador_1', figure=figure_1, className='indicador_1', config=estilo_graficas),
 #                   dcc.Graph(id='tabla', figure= figure_tabla, className='tabla')], className='contenedor-pronostico')
-
-# layout = html.Div([html.Div([html.P('Índice de contaminación'),
-#                              html.H1(id='indice', className='indice')], id='indicador', className='mini_container-grid-2'),
-#                    dcc.Graph(id='tabla', figure=figure_tabla, className='tabla'),
-#                    dcc.Graph(id='indices', figure=figure_lineas, animate=True, className='indices', config=estilo_graficas),
-#                    html.Div(dcc.Graph(figure=figure_mapa, id='mapa-graph', className='mapa-graph', config=estilo_graficas),
-#                             id='mapa', className='mapa')])
-
-
 
 
 layout = html.Div(

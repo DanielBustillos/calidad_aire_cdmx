@@ -134,8 +134,7 @@ data_mapa = go.Choroplethmapbox(z=z,
                                 marker_opacity=0.5)
 
 layout_mapa = go.Layout(title_x=0.5,
-                        width=700,
-                        height=700,
+                        autosize=True,
                         mapbox={'center': {'lat': 19.546232,
                                            'lon': -99.035067},
                                 'style': 'carto-positron',

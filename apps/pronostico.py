@@ -286,9 +286,9 @@ layout_lineas = go.Layout(title={'text': 'Histórico y pronóstico de índice de
                                    'fillcolor': '#ee2225',
                                    'opacity': 0.6,
                                    'layer': 'below',
-                                   'line_width': 0}
-                                  ]
-                          )
+                                   'line_width': 0}],
+                          paper_bgcolor='#f9f9f9',
+                          plot_bgcolor='#f9f9f9')
 
 figure_lineas = {'data': data_lineas,
                  'layout': layout_lineas}

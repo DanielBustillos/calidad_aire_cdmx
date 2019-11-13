@@ -323,13 +323,14 @@ lista_colores_opacos = ['#cce29a', '#fbf4a3', '#ffc98b', '#f59678', '#b087b1', '
 colores_columnas = [lista_colores, lista_colores_opacos]
 
 data_tabla = go.Table(header={'values': valores_header,
-                              'fill': {'color': '#ffffff'},
+                              'height': 20,
+                              'fill': {'color': '#f9f9f9'},
                               'font': {'family': 'Avenir LT Std 55 Roman',
                                        'size': 10,
                                        'color': 'black'},
-                              'align': 'center',
+                              'align': 'left',
                               'line': {'color': '#f9f9f9',
-                                       'width': 2}},
+                                       'width': 1}},
                       cells={'values': valores_celdas,
                              'font': {'family': 'Avenir LT Std 55 Roman',
                                       'size': 10,
@@ -338,12 +339,15 @@ data_tabla = go.Table(header={'values': valores_header,
                              'fill': {'color': colores_columnas},
                              'line': {'color': '#f9f9f9',
                                       'width': 2}},
-                      columnwidth=[18, 12, 70])
+                      columnwidth=[18, 9, 73])
 
-layout_tabla = go.Layout(margin={'l': 0,
-                                 'r': 0,
-                                 't': 0,
-                                 'b': 30})
+layout_tabla = go.Layout(margin={'l': 5,
+                                 'r': 5,
+                                 't': 5,
+                                 'b': 5},
+                         paper_bgcolor='#f9f9f9',
+                         plot_bgcolor='#f9f9f9',
+                         autosize=True)
 
 figure_tabla = {'data': [data_tabla],
                 'layout': layout_tabla}
@@ -355,11 +359,12 @@ estilo_graficas = {'responsive': True,
                    'displaylogo': False}
 
 layout = html.Div(
-    [html.Div(dcc.Graph(figure=figure_mapa, id='mapa-graph', className='mapa-graph', config=estilo_graficas),
-              id='mapa', className='mapa'),
+    [html.Div(dcc.Graph(figure=figure_mapa, id='mapa', className='mapa', config=estilo_graficas),
+              id='mapa-container', className='mapa-container'),
      html.Div([html.P('Indice de contaminación'),
                html.H1(id='indice', className='indice')], id='indicador', className='mini_container-grid-2'),
-     dcc.Graph(id='tabla', figure=figure_tabla, className='tabla'),
+     html.Div(dcc.Graph(id='tabla', figure=figure_tabla, className='tabla'),
+              id='tabla-container', className='tabla-container'),
      dcc.Graph(id='indices', figure=figure_lineas, animate=True, className='indices', config=estilo_graficas)],
     className='contenedor-pronostico')
 

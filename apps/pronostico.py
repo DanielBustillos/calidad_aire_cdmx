@@ -293,6 +293,80 @@ layout_lineas = go.Layout(title={'text': 'Histórico y pronóstico de índice de
 figure_lineas = {'data': data_lineas,
                  'layout': layout_lineas}
 
+
+# ---------------------------------CONSTRUIR TABLA EXPLICATIVA DEL ÍNDICE DE CALIDA DEL AIRE------------------#
+
+# Textos en celdas
+buena = 'Existe poco o ningún riesgo para la salud. Se puede realizar cualquier actividad al aire libre'
+regular = 'Los grupos susceptibles pueden presentar síntomas en la salud. Las personas que son extremadamente ' \
+          'susceptibles a la contaminación deben considerar limitar la exposición al aire libre.'
+mala = 'Los grupos susceptibles presentan efectos en la salud. Los niños, adultos mayores, personas con enfermedades ' \
+       'respiratorias y cardiovasculares, así como personas que realizan actividad física al aire libre deben limitar' \
+       ' la exposición al aire libre.'
+m_mala = 'Todos pueden presentar efectos en la salud; quienes pertenecen a los grupos susceptibles experimentan' \
+         ' efectos graves. Los niños, adultos mayores, personas que realizan actividad física intensa o con ' \
+         'enfermedades respiratorias y cardiovasculares, deben evitar la exposición al aire libre mientras que ' \
+         'el resto de la población debe limitar la exposición al aire libre.'
+e_mala = 'Toda la población debe evitar la exposición al aire libre pues hay probabilidades de experimentar efectos ' \
+         'graves en la salud.'
+peligrosa = 'Toda la población experimenta efectos graves en la salud. Suspensión de actividades al aire libre.'
+
+# Header y celdas
+valores_header = ['Calidad del aire', 'Intervalo', 'Efectos en la salud y recomendaciones']
+valores_celdas = [['Buena', 'Regular', 'Mala', 'Muy mala', 'Extremadamente mala', 'Peligrosa'],
+                  ['0 - 50', '51 - 100', '101 - 150', '151 - 200', '201 - 300', '301 - 500'],
+                  [buena, regular, mala, m_mala, e_mala, peligrosa]]
+
+# Lista de colores con opacidades
+lista_colores = ['#99ca3a', '#f7ec0f', '#f8991d', '#ed2124', '#7d287d', '#7e0230']
+lista_colores_opacos = ['#cce29a', '#fbf4a3', '#ffc98b', '#f59678', '#b087b1', '#c77f93']
+colores_columnas = [lista_colores, lista_colores_opacos]
+
+data_tabla = go.Table(header={'values': valores_header,
+                              'fill': {'color': '#ffffff'},
+                              'font': {'family': 'Avenir LT Std 55 Roman',
+                                       'size': 10,
+                                       'color': 'black'},
+                              'align': 'center',
+                              'line': {'color': '#f9f9f9',
+                                       'width': 2}},
+                      cells={'values': valores_celdas,
+                             'font': {'family': 'Avenir LT Std 55 Roman',
+                                      'size': 10,
+                                      'color': 'black'},
+                             'align': 'left',
+                             'fill': {'color': colores_columnas},
+                             'line': {'color': '#f9f9f9',
+                                      'width': 2}},
+                      columnwidth=[18, 12, 70])
+
+layout_tabla = go.Layout(margin={'l': 0,
+                                 'r': 0,
+                                 't': 0,
+                                 'b': 30})
+
+figure_tabla = {'data': [data_tabla],
+                'layout': layout_tabla}
+
+# ------------------------------------------CONSTRUIR LAYOUT DE LA PÁGINA----------------------------------------------#
+
+estilo_graficas = {'responsive': True,
+                   'autosizable': True,
+                   'displaylogo': False}
+
+layout = html.Div(
+    [html.Div(dcc.Graph(figure=figure_mapa, id='mapa-graph', className='mapa-graph', config=estilo_graficas),
+              id='mapa', className='mapa'),
+     html.Div([html.P('Indice de contaminación'),
+               html.H1(id='indice', className='indice')], id='indicador', className='mini_container-grid-2'),
+     dcc.Graph(id='tabla', figure=figure_tabla, className='tabla'),
+     dcc.Graph(id='indices', figure=figure_lineas, animate=True, className='indices', config=estilo_graficas)],
+    className='contenedor-pronostico')
+
+
+
+
+
 # -----------------------------------------GRAFICAR INDICADORES--------------------------------------------------------#
 #
 # # Indicador actual
@@ -373,68 +447,3 @@ figure_lineas = {'data': data_lineas,
 # figure_2 = {'data': data_2,
 #             'layout': layout_2}
 
-# ---------------------------------CONSTRUIR TABLA EXPLICATIVA DEL ÍNDICE DE CALIDA DEL AIRE------------------#
-
-# Textos en celdas
-buena = 'Existe poco o ningún riesgo para la salud. Se puede realizar cualquier actividad al aire libre'
-regular = 'Los grupos susceptibles pueden presentar síntomas en la salud. Las personas que son extremadamente ' \
-          'susceptibles a la contaminación deben considerar limitar la exposición al aire libre.'
-mala = 'Los grupos susceptibles presentan efectos en la salud. Los niños, adultos mayores, personas con enfermedades ' \
-       'respiratorias y cardiovasculares, así como personas que realizan actividad física al aire libre deben limitar ' \
-       'la exposición al aire libre.'
-m_mala = 'Todos pueden presentar efectos en la salud; quienes pertenecen a los grupos susceptibles experimentan' \
-         ' efectos graves. Los niños, adultos mayores, personas que realizan actividad física intensa o con ' \
-         'enfermedades respiratorias y cardiovasculares, deben evitar la exposición al aire libre mientras que ' \
-         'el resto de la población debe limitar la exposición al aire libre.'
-e_mala = 'Toda la población debe evitar la exposición al aire libre pues hay probabilidades de experimentar efectos graves en la salud.'
-peligrosa = 'Toda la población experimenta efectos graves en la salud. Suspensión de actividades al aire libre.'
-
-# Header y celdas
-valores_header = ['Calidad del aire', 'Intervalo', 'Efectos en la salud y recomendaciones']
-valores_celdas = [['Buena', 'Regular', 'Mala', 'Muy mala', 'Extremadamente mala', 'Peligrosa'],
-                  ['0 - 50', '51 - 100', '101 - 150', '151 - 200', '201 - 300', '301 - 500'],
-                  [buena, regular, mala, m_mala, e_mala, peligrosa]]
-
-# Lista de colores con opacidades
-lista_colores = ['#99ca3a', '#f7ec0f', '#f8991d', '#ed2124', '#7d287d', '#7e0230']
-lista_colores_opacos = ['#cce29a', '#fbf4a3', '#ffc98b', '#f59678', '#b087b1', '#c77f93']
-colores_columnas = [lista_colores, lista_colores_opacos]
-
-data_tabla = go.Table(header={'values': valores_header,
-                              'fill': {'color': '#ffffff'},
-                              'font': {'family': 'Avenir LT Std 55 Roman',
-                                       'size': 10,
-                                       'color': 'black', },
-                              'align': 'center'},
-                      cells={'values': valores_celdas,
-                             'font': {'family': 'Avenir LT Std 55 Roman',
-                                      'size': 10,
-                                      'color': 'black'},
-                             'align': 'left',
-                             'fill': {'color': colores_columnas}},
-                      columnwidth=[18, 12, 70])
-
-layout_tabla = {'title': 'Efectos en la salud'}
-
-figure_tabla = {'data': [data_tabla],
-                'layout': layout_tabla}
-
-# ------------------------------------------CONSTRUIR LAYOUT DE LA PÁGINA----------------------------------------------#
-
-estilo_graficas = {'responsive': True,
-                   'autosizable': True,
-                   'displaylogo': False}
-
-# layout= html.Div([dcc.Graph(id='indices', figure=figure_lineas, animate=True, className='indices', config=estilo_graficas),
-#                   dcc.Graph(id='indicador_1', figure=figure_1, className='indicador_1', config=estilo_graficas),
-#                   dcc.Graph(id='tabla', figure= figure_tabla, className='tabla')], className='contenedor-pronostico')
-
-
-layout = html.Div(
-    [html.Div(dcc.Graph(figure=figure_mapa, id='mapa-graph', className='mapa-graph', config=estilo_graficas),
-              id='mapa', className='mapa'),
-     html.Div([html.P('Indice de contaminación'),
-               html.H1(id='indice', className='indice')], id='indicador', className='mini_container-grid-2'),
-     dcc.Graph(id='tabla', figure=figure_tabla, className='tabla'),
-     dcc.Graph(id='indices', figure=figure_lineas, animate=True, className='indices', config=estilo_graficas)],
-    className='contenedor-pronostico')

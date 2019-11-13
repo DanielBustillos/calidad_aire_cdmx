@@ -6,7 +6,6 @@
     padding-top: 0px;
     top: 0px;
     z-index: 2000000000;
-
 }
 
 .button {
@@ -24,7 +23,6 @@
     opacity: 1.0;
     padding: 6px 4px 4px 4px;
     z-index: 2000000000;
-
 }
 
 .button:hover,
@@ -49,7 +47,6 @@
     border: none;
     cursor: pointer;
     z-index: 2000000000;
-
 }
 
 .dropdown {
@@ -71,7 +68,6 @@
     text-decoration: none;
     display: block;
     z-index: 2000000000;
-
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1}
@@ -90,7 +86,6 @@ header {
     justify-content: space-between;
     flex-direction: row;
     z-index: 2000000000;
-
 }
 
 header .container {
@@ -129,7 +124,7 @@ header .logo {
 .contenedor-pronostico {
     height: calc(100vh - 50px);
     display: grid;
-    grid-template-columns: 40% 15% 45%;
+    grid-template-columns: 38% 15% 47%;
     grid-template-rows: 40% 60%;
     grid-template-areas: 'mapa indicador tabla' 'mapa lineas lineas';
 }
@@ -150,7 +145,6 @@ header .logo {
     position: relative;
     grid-area: mapa;
     z-index: 1;
-
 }
 
 .mapa-graph {
@@ -160,7 +154,6 @@ header .logo {
     position: relative;
     grid-area: mapa;
     z-index: 1;
-
 }
 
 .indices {
@@ -175,24 +168,26 @@ header .logo {
 }
 
 .mini_container-grid-2 {
-    border-radius: 20px;
-    background-color: #f9f9f9;
     margin-top: 5px;
     margin-left: 10px;
     margin-right: 0px;
     position: relative;
+    border-radius: 20px;
+    background-color: #f9f9f9;
     box-shadow: 2px 2px 2px lightgrey;
     grid-area: indicador;
 }
 
 .tabla {
-    border-radius: 5px;
     margin-top: 5px;
     margin-left: 10px;
     margin-right: 10px;
     padding: 0;
     position: relative;
-    box-shadow; 2px 2px 2px lightgrey;
+    border-radius: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 2px 2px 2px lightgrey;
+
     grid-area: tabla;
 }
 

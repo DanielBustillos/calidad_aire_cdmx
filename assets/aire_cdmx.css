@@ -157,11 +157,12 @@ header .logo {
 }
 
 .indices {
-    border-radius: 30px;
-    margin-top: 10px;
+    border-radius: 20px;
+    margin-top: 0px;
     margin-left: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     margin-right: 10px;
+    padding: 5px;
     position: relative;
     box-shadow: 2px 2px 2px lightgrey;
     grid-area: lineas;

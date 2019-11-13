@@ -17,11 +17,6 @@ app.index_string = '''
                 margin: 0;
                 font-family: "Avenir LT Std 55 Roman";
                 font-size: 22px;
-                background-image: url('/assets/mapa_fondo.png');
-                background-position: center     center;
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-size: cover;
             }
         </style>
         <meta charset="UTF-8">

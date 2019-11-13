@@ -138,11 +138,11 @@ layout_mapa = go.Layout(title_x=0.5,
                         mapbox={'center': {'lat': 19.546232,
                                            'lon': -99.035067},
                                 'style': 'carto-positron',
-                                'zoom': 9},
+                                'zoom': 9.2},
                         margin={'l': 0,
                                 'r': 0,
                                 't': 0,
-                                'b': 30})
+                                'b': 0})
 
 figure_mapa = go.Figure(data=data_mapa,
                         layout=layout_mapa)

@@ -60,7 +60,8 @@ df = df[['fecha', 'indice_PM10', 'indice_pronostico_PM10', 'indice_pronostico_hi
 str_fecha_pronostico = fecha_max.strftime('%A %d de %B de %Y')
 str_hora_pronostico = fecha_max.strftime('%H:%M hrs')
 
-big_number_fecha_pronostico = fecha_max.strftime('%d/%b/%y %H:%M hrs')
+big_number_fecha_pronostico = fecha_max.strftime('%d/%b/%y')
+big_number_hora_pronostico = fecha_max.strftime ('%H:%M hrs')
 
 # Valores de índice actual (fecha_actual) y de pronóstico (fecha_max)
 o3_actual = df.loc[df['fecha'] == fecha_actual, 'indice_O3'].iloc[0]
@@ -69,22 +70,13 @@ o3_pronostico = df.loc[df['fecha'] == fecha_max, 'indice_pronostico_O3'].iloc[0]
 pm10_pronostico = df.loc[df['fecha'] == fecha_max, 'indice_pronostico_PM10'].iloc[0]
 contaminante, valor_indice = no_operar_nan(o3_actual, pm10_actual)
 contaminante_pronostico, valor_indice_pronostico = no_operar_nan(o3_pronostico, pm10_pronostico)
-print(contaminante_pronostico, valor_indice_pronostico)
-
-# # Valores del índice de calidad del aire actual en texto y en rango de colores
-# calidad_aire_actual= calidad_aire(valor_indice)
-# c_texto_actual= c_texto(calidad_aire_actual)
-#
-# # Valores del índice de calidad del aire (pronóstico) en texto y en rango de colores
-# calidad_aire_pronostico= calidad_aire(valor_indice_pronostico)
-# c_texto_pronostico= c_texto(calidad_aire_pronostico)
 
 # Rangos de indice de contaminación
 marcas_indicador = [0, 50, 100, 150, 200, 300, 500]
 
 # Colores y etiquetas de acuerdo al valor del índice de calidad del aire
-color_actual, leyenda_actual = color_leyenda_calidad_aire(valor_indice)
-color_pronostico, leyenda_pronostico = color_leyenda_calidad_aire(valor_indice_pronostico)
+color_actual, color_actual_opaco, leyenda_actual = color_leyenda_calidad_aire(valor_indice)
+color_pronostico, color_pronostico_opaco, leyenda_pronostico = color_leyenda_calidad_aire(valor_indice_pronostico)
 
 # -----------------------------------------MAPA DE CONTAMINACIÓN POR AGEB---------------------------------------------#
 # Esto se realizó con datos viejos, para poder mostrar un demo en el tablero
@@ -289,8 +281,8 @@ layout_lineas = go.Layout(title={'text': 'Histórico y pronóstico de índice de
                                    'opacity': 0.6,
                                    'layer': 'below',
                                    'line_width': 0}],
-                          paper_bgcolor='#f9f9f9',
-                          plot_bgcolor='#f9f9f9')
+                          paper_bgcolor='#f5f5f5',
+                          plot_bgcolor='#f5f5f5')
 
 figure_lineas = {'data': data_lineas,
                  'layout': layout_lineas}
@@ -326,12 +318,12 @@ colores_columnas = [lista_colores, lista_colores_opacos]
 
 data_tabla = go.Table(header={'values': valores_header,
                               'height': 20,
-                              'fill': {'color': '#f9f9f9'},
+                              'fill': {'color': '#f5f5f5'},
                               'font': {'family': 'Avenir LT Std 55 Roman',
                                        'size': 10,
                                        'color': 'black'},
                               'align': 'left',
-                              'line': {'color': '#f9f9f9',
+                              'line': {'color': '#f5f5f5',
                                        'width': 1}},
                       cells={'values': valores_celdas,
                              'font': {'family': 'Avenir LT Std 55 Roman',
@@ -339,12 +331,12 @@ data_tabla = go.Table(header={'values': valores_header,
                                       'color': '#282828'},
                              'align': 'left',
                              'fill': {'color': colores_columnas},
-                             'line': {'color': '#f9f9f9',
+                             'line': {'color': '#f5f5f5',
                                       'width': 2}},
                       columnwidth=[18, 9, 73])
 
-layout_tabla = go.Layout(paper_bgcolor='#f9f9f9',
-                         plot_bgcolor='#f9f9f9',
+layout_tabla = go.Layout(paper_bgcolor='#f5f5f5',
+                         plot_bgcolor='#f5f5f5',
                          autosize=True,
                          margin={'l': 5,
                                  'r': 5,
@@ -369,8 +361,8 @@ layout = html.Div(
                html.P(leyenda_pronostico, id='leyenda-indice-pronostico', className='leyenda-indice-pronostico'),
                html.P('por ' + contaminante_pronostico,
                       id='parrafo-indice-pronostico', className='parrafo-indice-pronostico'),
-               html.P(big_number_fecha_pronostico, id='fecha-pronostico', className='fecha-pronostico')],
-              id='indicador', className='mini_container-grid-2'),
+               html.P(big_number_fecha_pronostico + '  ' + big_number_hora_pronostico, id='fecha-pronostico', className='fecha-pronostico')],
+              id='indicador', className='mini_container-grid-2', style={'background-color': color_pronostico, 'opacity':'1'}),
      html.Div(dcc.Graph(id='tabla', figure=figure_tabla, className='tabla'),
               id='tabla-container', className='tabla-container'),
      dcc.Graph(id='indices', figure=figure_lineas, animate=True, className='indices', config=estilo_graficas)],

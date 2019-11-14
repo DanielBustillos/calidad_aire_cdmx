@@ -54,28 +54,35 @@ def colores_(ca):
         return '#7e0023'
 
 def color_leyenda_calidad_aire(vi):
-    color= ''
-    leyenda= ''
+    color = ''
+    color_opaco = ''
+    leyenda = ''
     if 0 <= vi <= 50:
-        color= '#99ca3a'
-        leyenda= 'Buena'
+        color = '#99ca3a'
+        color_opaco = '#cce29a'
+        leyenda = 'Buena'
     if 50 < vi <= 100:
         color = '#f7ec0f'
+        color_opaco = '#fbf4a3'
         leyenda = 'Regular'
     if 100 < vi <= 150:
         color = '#f8991d'
+        color_opaco = '#ffc98b'
         leyenda = 'Mala'
     if 150 < vi <= 200:
         color = '#ed2124'
+        color_opaco = '#f59678'
         leyenda = 'Muy mala'
     if 200 < vi <= 300:
         color = '#7d287d'
+        color_opaco = '#b087b1'
         leyenda = 'Extremadamente mala'
     if 300 < vi <= 500:
         color = '#7e0023'
+        color_opaco = '#c77f93'
         leyenda = 'Peligrosa'
 
-    return color, leyenda
+    return color, color_opaco, leyenda
 
 def dic_colores_gauge():
     dic_colores_gauge = {'gradient': True,

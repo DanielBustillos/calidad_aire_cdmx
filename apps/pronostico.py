@@ -60,7 +60,7 @@ df = df[['fecha', 'indice_PM10', 'indice_pronostico_PM10', 'indice_pronostico_hi
 str_fecha_pronostico = fecha_max.strftime('%A %d de %B de %Y')
 str_hora_pronostico = fecha_max.strftime('%H:%M hrs')
 
-big_number_fecha_pronostico = fecha_max.strftime()
+big_number_fecha_pronostico = fecha_max.strftime('%d/%b/%y %H:%M hrs')
 
 # Valores de índice actual (fecha_actual) y de pronóstico (fecha_max)
 o3_actual = df.loc[df['fecha'] == fecha_actual, 'indice_O3'].iloc[0]
@@ -364,11 +364,12 @@ estilo_graficas = {'responsive': True,
 layout = html.Div(
     [html.Div(dcc.Graph(figure=figure_mapa, id='mapa', className='mapa', config=estilo_graficas),
               id='mapa-container', className='mapa-container'),
-     html.Div([html.P(valor_indice_pronostico, id='indice', className='valor-indice'),
-               html.P(leyenda_pronostico, id='leyenda-indice', className='leyenda-indice'),
-               html.P('índice por ' + contaminante_pronostico,
-                      id='parrafo-indice', className='parrafo-indice'),
-               html.P('para ', id='fecha-pronostico', className='fecha-pronostico')],
+     html.Div([html.P('pronóstico', id='pronostico', className='pronostico'),
+               html.P(valor_indice_pronostico, id='valor-indice-pronostico', className='valor-indice-pronostico'),
+               html.P(leyenda_pronostico, id='leyenda-indice-pronostico', className='leyenda-indice-pronostico'),
+               html.P('por ' + contaminante_pronostico,
+                      id='parrafo-indice-pronostico', className='parrafo-indice-pronostico'),
+               html.P(big_number_fecha_pronostico, id='fecha-pronostico', className='fecha-pronostico')],
               id='indicador', className='mini_container-grid-2'),
      html.Div(dcc.Graph(id='tabla', figure=figure_tabla, className='tabla'),
               id='tabla-container', className='tabla-container'),

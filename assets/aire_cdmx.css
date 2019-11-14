@@ -186,7 +186,21 @@ header .logo {
     grid-area: indicador;
 }
 
-.leyenda-indice {
+.pronostico {
+    font-size: 18px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.valor-indice-pronostico {
+    font-size: 100px;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 15px;
+    margin: 0;
+}
+
+.leyenda-indice-pronostico {
     font-size: 40px;
     text-align: left;
     padding-left: 10px;
@@ -194,19 +208,16 @@ header .logo {
     padding-top: 0;
 }
 
-.valor-indice {
-    font-size: 100px;
-    text-align: left;
-    padding-left: 10px;
-    padding-top: 35px;
-    margin: 0;
-}
-
-.parrafo-indice {
+.parrafo-indice-pronostico {
     font-size: 22px;
     margin: 0;
     padding-left: 10px;
-    padding-top: 25px;
+    padding-top: 0;
+}
+
+.fecha-pronostico {
+    padding-left: 10px;
+    font-size: 18px;
 }
 
 /************************************************TABLA********************************************/

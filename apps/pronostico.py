@@ -68,6 +68,8 @@ pm10_pronostico = df.loc[df['fecha'] == fecha_max, 'indice_pronostico_PM10'].ilo
 valor_indice = no_operar_nan(o3_actual, pm10_actual)
 valor_indice_pronostico = no_operar_nan(o3_pronostico, pm10_pronostico)
 
+print(valor_indice_pronostico)
+
 # # Valores del índice de calidad del aire actual en texto y en rango de colores
 # calidad_aire_actual= calidad_aire(valor_indice)
 # c_texto_actual= c_texto(calidad_aire_actual)
@@ -82,6 +84,8 @@ marcas_indicador = [0, 50, 100, 150, 200, 300, 500]
 # Colores y etiquetas de acuerdo al valor del índice de calidad del aire
 color_actual, leyenda_actual = color_leyenda_calidad_aire(valor_indice)
 color_pronostico, leyenda_pronostico = color_leyenda_calidad_aire(valor_indice_pronostico)
+
+print(leyenda_pronostico)
 
 # -----------------------------------------MAPA DE CONTAMINACIÓN POR AGEB---------------------------------------------#
 # Esto se realizó con datos viejos, para poder mostrar un demo en el tablero
@@ -362,8 +366,9 @@ estilo_graficas = {'responsive': True,
 layout = html.Div(
     [html.Div(dcc.Graph(figure=figure_mapa, id='mapa', className='mapa', config=estilo_graficas),
               id='mapa-container', className='mapa-container'),
-     html.Div([html.P('Indice de contaminación'),
-               html.H1(id='indice', className='indice')], id='indicador', className='mini_container-grid-2'),
+     html.Div([html.P(valor_indice_pronostico, id='indice', className='valor-indice'),
+               html.P(leyenda_pronostico, id='leyenda-indice', className='leyenda-indice'),
+               html.P('Pronóstico índice', id='parrafo-indice', className='parrafo-indice')], id='indicador', className='mini_container-grid-2'),
      html.Div(dcc.Graph(id='tabla', figure=figure_tabla, className='tabla'),
               id='tabla-container', className='tabla-container'),
      dcc.Graph(id='indices', figure=figure_lineas, animate=True, className='indices', config=estilo_graficas)],

@@ -64,10 +64,13 @@ def indice_O3(row, columna):
 
 # Operar NaN
 def no_operar_nan(valor_1, valor_2):
-    result=0
+    result = 0
     if pd.isnull(valor_1) or pd.isnull(valor_2):
-        result=float('NaN')
+        result = float('NaN')
         return result
     else:
-        result= int(round(max(valor_1, valor_2)))
-        return result
+        result = int(round(max(valor_1, valor_2)))
+        if valor_1 > valor_2:
+            return 'O3', result
+        else:
+            return 'PM10', result

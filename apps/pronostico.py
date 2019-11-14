@@ -60,15 +60,16 @@ df = df[['fecha', 'indice_PM10', 'indice_pronostico_PM10', 'indice_pronostico_hi
 str_fecha_pronostico = fecha_max.strftime('%A %d de %B de %Y')
 str_hora_pronostico = fecha_max.strftime('%H:%M hrs')
 
+big_number_fecha_pronostico = fecha_max.strftime()
+
 # Valores de índice actual (fecha_actual) y de pronóstico (fecha_max)
 o3_actual = df.loc[df['fecha'] == fecha_actual, 'indice_O3'].iloc[0]
 pm10_actual = df.loc[df['fecha'] == fecha_actual, 'indice_PM10'].iloc[0]
 o3_pronostico = df.loc[df['fecha'] == fecha_max, 'indice_pronostico_O3'].iloc[0]
 pm10_pronostico = df.loc[df['fecha'] == fecha_max, 'indice_pronostico_PM10'].iloc[0]
-valor_indice = no_operar_nan(o3_actual, pm10_actual)
-valor_indice_pronostico = no_operar_nan(o3_pronostico, pm10_pronostico)
-
-print(valor_indice_pronostico)
+contaminante, valor_indice = no_operar_nan(o3_actual, pm10_actual)
+contaminante_pronostico, valor_indice_pronostico = no_operar_nan(o3_pronostico, pm10_pronostico)
+print(contaminante_pronostico, valor_indice_pronostico)
 
 # # Valores del índice de calidad del aire actual en texto y en rango de colores
 # calidad_aire_actual= calidad_aire(valor_indice)
@@ -85,8 +86,6 @@ marcas_indicador = [0, 50, 100, 150, 200, 300, 500]
 color_actual, leyenda_actual = color_leyenda_calidad_aire(valor_indice)
 color_pronostico, leyenda_pronostico = color_leyenda_calidad_aire(valor_indice_pronostico)
 
-print(leyenda_pronostico)
-
 # -----------------------------------------MAPA DE CONTAMINACIÓN POR AGEB---------------------------------------------#
 # Esto se realizó con datos viejos, para poder mostrar un demo en el tablero
 
@@ -94,7 +93,6 @@ with open('data/o3_ageb.json') as geofile:
     jfile = json.load(geofile)
 
 geodf = gpd.read_file('data/O3_ageb.shp')
-
 
 # Revisar la estructura del geojson y corregirla de ser necesario
 def check_geojson(j_file):
@@ -368,93 +366,12 @@ layout = html.Div(
               id='mapa-container', className='mapa-container'),
      html.Div([html.P(valor_indice_pronostico, id='indice', className='valor-indice'),
                html.P(leyenda_pronostico, id='leyenda-indice', className='leyenda-indice'),
-               html.P('Pronóstico índice', id='parrafo-indice', className='parrafo-indice')], id='indicador', className='mini_container-grid-2'),
+               html.P('índice por ' + contaminante_pronostico,
+                      id='parrafo-indice', className='parrafo-indice'),
+               html.P('para ', id='fecha-pronostico', className='fecha-pronostico')],
+              id='indicador', className='mini_container-grid-2'),
      html.Div(dcc.Graph(id='tabla', figure=figure_tabla, className='tabla'),
               id='tabla-container', className='tabla-container'),
      dcc.Graph(id='indices', figure=figure_lineas, animate=True, className='indices', config=estilo_graficas)],
     className='contenedor-pronostico')
-
-
-
-
-
-# -----------------------------------------GRAFICAR INDICADORES--------------------------------------------------------#
-#
-# # Indicador actual
-# data_1 = [{'title': {'text': leyenda_actual,
-#                      'align': 'left',
-#                      'font': {'family': 'Avenir LT Std 55 Roman',
-#                               'size': '20px',
-#                               'color': 'black'}
-#                      },
-#            'type': 'indicator',
-#            'mode': 'gauge+number',
-#            'value': valor_indice,
-#            'align': 'center',
-#            'number': {'font': {'family': 'Avenir LT Std 55 Roman',
-#                                'size': '15px',
-#                                'color': 'black'}
-#                       },
-#            'gauge': {'shape': 'angular',
-#                      'bar': {'color': color_actual,
-#                              'line': {'color': color_actual,
-#                                       'width': '1'},
-#                              'tickness': '1'},
-#                      'bgcolor': 'white',
-#                      'bordercolor': 'black',
-#                      'borderwidth': '1',
-#                      'axis': {'range': [0, 500],
-#                               'visible': True,
-#                               'tickmode': 'array',
-#                               'tickvals': marcas_indicador,
-#                               'ticks': 'inside',
-#                               'tickcolor': 'black',
-#                               'ticklen': '10px'}
-#                      }
-#            }
-#           ]
-#
-# layout_1 = {'title': 'Ahora'}
-#
-# figure_1 = {'data': data_1,
-#             'layout': layout_1}
-#
-# # Indicador pronóstico
-# data_2 = [{'title': {'text': leyenda_actual,
-#                      'align': 'left',
-#                      'font': {'family': 'Avenir LT Std 55 Roman',
-#                               'size': '20px',
-#                               'color': 'black'}
-#                      },
-#            'type': 'indicator',
-#            'mode': 'gauge+number',
-#            'value': valor_indice_pronostico,
-#            'align': 'center',
-#            'number': {'font': {'family': 'Avenir LT Std 55 Roman',
-#                                'size': '15px',
-#                                'color': 'black'}
-#                       },
-#            'gauge': {'shape': 'angular',
-#                      'bar': {'color': color_actual,
-#                              'line': {'color': color_actual,
-#                                       'width': '1'},
-#                              'tickness': '1'},
-#                      'bgcolor': 'white',
-#                      'bordercolor': 'black',
-#                      'borderwidth': '1',
-#                      'axis': {'range': [0, 500],
-#                               'visible': True,
-#                               'tickmode': 'array',
-#                               'tickvals': marcas_indicador,
-#                               'ticks': 'inside',
-#                               'tickcolor': 'black',
-#                               'ticklen': '10px'}
-#                      }
-#            }
-#           ]
-#
-# layout_2 = {'title': 'Mañana'}
-#
-# figure_2 = {'data': data_2,
-#             'layout': layout_2}
 

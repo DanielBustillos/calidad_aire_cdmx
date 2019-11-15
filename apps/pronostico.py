@@ -86,6 +86,7 @@ with open('data/o3_ageb.json') as geofile:
 
 geodf = gpd.read_file('data/O3_ageb.shp')
 
+
 # Revisar la estructura del geojson y corregirla de ser necesario
 def check_geojson(j_file):
     if 'id' not in j_file['features'][0].keys():
@@ -361,10 +362,10 @@ layout = html.Div(
                html.P(leyenda_pronostico, id='leyenda-indice-pronostico', className='leyenda-indice-pronostico'),
                html.P('por ' + contaminante_pronostico,
                       id='parrafo-indice-pronostico', className='parrafo-indice-pronostico'),
-               html.P(big_number_fecha_pronostico + '  ' + big_number_hora_pronostico, id='fecha-pronostico', className='fecha-pronostico')],
-              id='indicador', className='mini_container-grid-2', style={'background-color': color_pronostico, 'opacity':'1'}),
+               html.P(big_number_fecha_pronostico + '  ' + big_number_hora_pronostico, id='fecha-pronostico',
+                      className='fecha-pronostico')],
+              id='indicador', className='mini_container-grid-2', style={'background-color': color_pronostico}),
      html.Div(dcc.Graph(id='tabla', figure=figure_tabla, className='tabla'),
               id='tabla-container', className='tabla-container'),
      dcc.Graph(id='indices', figure=figure_lineas, animate=True, className='indices', config=estilo_graficas)],
     className='contenedor-pronostico')
-

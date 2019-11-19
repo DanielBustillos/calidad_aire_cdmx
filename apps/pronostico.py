@@ -1,3 +1,4 @@
+# coding=utf-8
 # App de índices de contaminantes (PM10 y O3)
 import geopandas as gpd
 import re
@@ -61,7 +62,7 @@ str_fecha_pronostico = fecha_max.strftime('%A %d de %B de %Y')
 str_hora_pronostico = fecha_max.strftime('%H:%M hrs')
 
 big_number_fecha_pronostico = fecha_max.strftime('%d/%b/%y')
-big_number_hora_pronostico = fecha_max.strftime ('%H:%M hrs')
+big_number_hora_pronostico = fecha_max.strftime('%H:%M hrs')
 
 # Valores de índice actual (fecha_actual) y de pronóstico (fecha_max)
 o3_actual = df.loc[df['fecha'] == fecha_actual, 'indice_O3'].iloc[0]
@@ -143,7 +144,7 @@ figure_mapa = go.Figure(data=data_mapa,
                         layout=layout_mapa)
 
 
-# ------------------------------------------------GRAFICAR LINE CHART---------------------------------------------------#
+# ------------------------------------------------GRAFICAR LINE CHART-------------------------------------------------#
 # Función que crea cada trazo, es decir una línea por contaminante y define si es sólida o punteada
 def crear_trazo(df, y, name, color, x='fecha', width=3):
     regex = re.findall('pronóstico', name)
@@ -171,11 +172,12 @@ etiqueta_valor_actual = [go.Scatter(x=[posicion_x_etiqueta],
 
 data_lineas = data_lineas_a + etiqueta_valor_actual
 
-layout_lineas = go.Layout(title={'text': 'Histórico y pronóstico de índice de calidad del aire'},
+layout_lineas = go.Layout(title={'text': 'Pronóstico hora a hora'},
                           xaxis={'title': 'fecha',
                                  'tickangle': -45,
                                  'automargin': True,
-                                 'tickformat': '%d %B / %H hrs',
+                                 'tickformat': '%a %e %b / %H hrs',
+                                 # 'tickformat': '%d %B / %H hrs',
                                  'showgrid': False,
                                  'nticks': 22},
                           yaxis={'title': 'índice de calidad del aire',

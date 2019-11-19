@@ -1,3 +1,4 @@
+# coding=utf-8
 # Definición de diccionarios y etiquetas para los contaminantes.
 # Esto se define de manera manual para que cada grupo de O3, PM10 y PM2.5 tengan una paleta de colores consistente
 
@@ -84,12 +85,34 @@ def color_leyenda_calidad_aire(vi):
 
     return color, color_opaco, leyenda
 
-def dic_colores_gauge():
-    dic_colores_gauge = {'gradient': True,
-                         'ranges': {'#99ca3a': [0, 50],
-                                    '#f7ec0f': [50, 100],
-                                    '#f8991d': [100, 150],
-                                    '#ed2124': [150, 200],
-                                    '#7d287d': [200, 300],
-                                    '#7e0230': [300, 350]}}
-    return dic_colores_gauge
+
+def rectangulos(maximo, fecha_actual, inicio_rango, fecha_max):
+    linea = {'type': 'line', 'xref': 'x', 'yref': 'y', 'x0': fecha_actual, 'y0': 0, 'x1': fecha_actual, 'y1': maximo,
+             'line': {'color': 'MediumPurple', 'width': 1, 'dash': 'dot'}}
+    verde_opaco = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': inicio_rango, 'y0': 0, 'x1': fecha_actual,
+                      'y1': 50, 'fillcolor': '#99ca3a', 'opacity': 0.3, 'layer': 'below', 'line_width': 0}
+    verde = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': fecha_actual, 'y0': 0, 'x1': fecha_max, 'y1': 50,
+             'fillcolor': '#99ca3a', 'opacity': 0.6, 'layer': 'below', 'line_width': 0}
+    amarillo_opaco = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': inicio_rango, 'y0': 51, 'x1': fecha_actual,
+                     'y1': 100, 'fillcolor': '#f9eb10', 'opacity': 0.3, 'layer': 'below', 'line_width': 0}
+    amarillo = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': fecha_actual, 'y0': 51, 'x1': fecha_max, 'y1': 100,
+               'fillcolor': '#f9eb10', 'opacity': 0.6, 'layer': 'below', 'line_width': 0}
+    naranja_opaco = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': inicio_rango, 'y0': 101, 'x1': fecha_actual,
+                     'y1': 150, 'fillcolor': '#fa981d', 'opacity': 0.3, 'layer': 'below', 'line_width': 0}
+    naranja = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': fecha_actual, 'y0': 101, 'x1': fecha_max, 'y1': 150,
+               'fillcolor': '#fa981d', 'opacity': 0.6, 'layer': 'below', 'line_width': 0}
+    rojo_opaco = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': inicio_rango, 'y0': 151, 'x1': fecha_actual,
+                  'y1': 200, 'fillcolor': '#ee2225', 'opacity': 0.3, 'layer': 'below', 'line_width': 0}
+    rojo = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': fecha_actual, 'y0': 151, 'x1': fecha_max, 'y1': 200,
+            'fillcolor': '#ee2225', 'opacity': 0.6, 'layer': 'below', 'line_width': 0}
+    morado_opaco = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': inicio_rango, 'y0': 201, 'x1': fecha_actual,
+                    'y1': 300, 'fillcolor': '#7d287d', 'opacity': 0.3, 'layer': 'below', 'line_width': 0}
+    morado = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': fecha_actual, 'y0': 201, 'x1': fecha_max, 'y1': 300,
+                    'fillcolor': '#7d287d', 'opacity': 0.6, 'layer': 'below', 'line_width': 0}
+    vino_opaco = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': inicio_rango, 'y0': 301, 'x1': fecha_actual,
+                  'y1': 500, 'fillcolor': '#7e0023', 'opacity': 0.3, 'layer': 'below', 'line_width': 0}
+    vino = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': fecha_actual, 'y0': 301, 'x1': fecha_max, 'y1': 500,
+                    'fillcolor': '#7e0023', 'opacity': 0.6, 'layer': 'below', 'line_width': 0}
+    shapes = [linea, verde_opaco, verde, amarillo_opaco, amarillo, naranja_opaco, naranja, rojo_opaco, rojo,
+              morado_opaco, morado, vino_opaco, vino]
+    return shapes

@@ -1,3 +1,4 @@
+# coding=utf-8
 import pandas as pd
 
 # Conversión de unidades de microgramo/metro_cúbico a ppb(partículas por billón)

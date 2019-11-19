@@ -163,7 +163,7 @@ def crear_trazo(df, y, name, color, x='fecha', width=3):
 
 data_lineas_a = [crear_trazo(df, col, dic_etiquetas[col], dic_colores[col]) for col in df.columns[1:]]
 etiqueta_valor_actual = [go.Scatter(x=[posicion_x_etiqueta],
-                                    y=[180],
+                                    y=[125],
                                     text=['valor actual'],
                                     mode='text',
                                     showlegend=False)]

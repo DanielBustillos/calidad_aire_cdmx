@@ -87,8 +87,7 @@ def color_leyenda_calidad_aire(vi):
 
 
 def rectangulos(maximo, fecha_actual, inicio_rango, fecha_max):
-    linea = {'type': 'line', 'xref': 'x', 'yref': 'y', 'x0': fecha_actual, 'y0': 0, 'x1': fecha_actual, 'y1': maximo,
-             'line': {'color': 'MediumPurple', 'width': 1, 'dash': 'dot'}}
+    shapes = []
     verde_opaco = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': inicio_rango, 'y0': 0, 'x1': fecha_actual,
                       'y1': 50, 'fillcolor': '#99ca3a', 'opacity': 0.3, 'layer': 'below', 'line_width': 0}
     verde = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': fecha_actual, 'y0': 0, 'x1': fecha_max, 'y1': 50,
@@ -113,6 +112,26 @@ def rectangulos(maximo, fecha_actual, inicio_rango, fecha_max):
                   'y1': 500, 'fillcolor': '#7e0023', 'opacity': 0.3, 'layer': 'below', 'line_width': 0}
     vino = {'type': 'rect', 'xref': 'x', 'yref': 'y', 'x0': fecha_actual, 'y0': 301, 'x1': fecha_max, 'y1': 500,
                     'fillcolor': '#7e0023', 'opacity': 0.6, 'layer': 'below', 'line_width': 0}
-    shapes = [linea, verde_opaco, verde, amarillo_opaco, amarillo, naranja_opaco, naranja, rojo_opaco, rojo,
-              morado_opaco, morado, vino_opaco, vino]
+    if maximo <= 150:
+        final_rango = 150
+        linea = {'type': 'line', 'xref': 'x', 'yref': 'y', 'x0': fecha_actual, 'y0': 0, 'x1': fecha_actual,
+                 'y1': final_rango, 'line': {'color': 'MediumPurple', 'width': 1, 'dash': 'dot'}}
+        shapes = [linea, verde_opaco, verde, amarillo_opaco, amarillo, naranja_opaco, naranja]
+    if 150 < maximo <= 200:
+        final_rango = 200
+        linea = {'type': 'line', 'xref': 'x', 'yref': 'y', 'x0': fecha_actual, 'y0': 0, 'x1': fecha_actual,
+                 'y1': final_rango, 'line': {'color': 'MediumPurple', 'width': 1, 'dash': 'dot'}}
+        shapes = [linea, verde_opaco, verde, amarillo_opaco, amarillo, naranja_opaco, naranja, rojo, rojo_opaco]
+    if 200 < maximo <= 300:
+        final_rango = 300
+        linea = {'type': 'line', 'xref': 'x', 'yref': 'y', 'x0': fecha_actual, 'y0': 0, 'x1': fecha_actual,
+                 'y1': final_rango, 'line': {'color': 'MediumPurple', 'width': 1, 'dash': 'dot'}}
+        shapes = [linea, verde_opaco, verde, amarillo_opaco, amarillo, naranja_opaco, naranja, rojo_opaco, rojo,
+                  morado_opaco, morado]
+    if 300 < maximo <= 500:
+        final_rango = 500
+        linea = {'type': 'line', 'xref': 'x', 'yref': 'y', 'x0': fecha_actual, 'y0': 0, 'x1': fecha_actual,
+                 'y1': final_rango, 'line': {'color': 'MediumPurple', 'width': 1, 'dash': 'dot'}}
+        shapes = [linea, verde_opaco, verde, amarillo_opaco, amarillo, naranja_opaco, naranja, rojo_opaco, rojo,
+                  morado_opaco, morado, vino_opaco, vino]
     return shapes

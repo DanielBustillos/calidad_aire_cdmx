@@ -105,15 +105,44 @@ jdata = check_geojson(jfile)
 # Establecer las variables de contaminación
 z = geodf.O3_anual_f
 
+# Definir escala de colores del mapa
+
+maximo_mapa = max(geodf['O3_anual_f'])
+
+
+def escala_mapa(valor_maximo):
+    colorscale = []
+    if valor_maximo <= 100:
+        colorscale = [[0.0, '#99ca3a'],
+                      [1.0, '#f7ec0f']]
+    if 100 < valor_maximo <= 150:
+        colorscale = [[0.0, '#99ca3a'],
+                      [0.5, '#f7ec0f'],
+                      [1.0, '#f8991d']]
+    if 150 < valor_maximo <= 200:
+        colorscale = [[0.0, '#99ca3a'],
+                      [3.25, '#f7ec0f'],
+                      [6.5, '#f8991d'],
+                      [1.0, '#ed2124']]
+    if 200 < valor_maximo <= 300:
+        colorscale = [[0.0, '#99ca3a'],
+                      [2.5, '#f7ec0f'],
+                      [5.0, '#f8991d'],
+                      [7.5, '#ed2124'],
+                      [1.0, '#7d287d']]
+    if 300 < valor_maximo <= 500:
+        colorscale = [[0.0, '#99ca3a'],
+                      [0.2, '#f7ec0f'],
+                      [0.4, '#f8991d'],
+                      [0.6, '#ed2124'],
+                      [0.8, '#7d287d'],
+                      [1.0, '#7e0230']]
+    return colorscale
+
+
+colorscale_mapa = escala_mapa(maximo_mapa)
+
 # Graficar mapa
-
-colorscale_mapa = [[0.0, '#99ca3a'],
-                   [0.2, '#f7ec0f'],
-                   [0.4, '#f8991d'],
-                   [0.6, '#ed2124'],
-                   [0.8, '#7d287d'],
-                   [1.0, '#7e0230']]
-
 data_mapa = go.Choroplethmapbox(z=z,
                                 locations=geodf.id,
                                 colorscale=colorscale_mapa,
@@ -144,17 +173,17 @@ figure_mapa = go.Figure(data=data_mapa,
 
 # ------------------------------------------------GRAFICAR LINE CHART-------------------------------------------------#
 # Función que crea cada trazo, es decir una línea por contaminante y define si es sólida o punteada
-def crear_trazo(df, y, name, color, x='fecha', width=3):
+def crear_trazo(dataframe, y, name, color, x='fecha', width=3):
     regex = re.findall('pronóstico', name)
     if regex:
-        trazo = go.Scatter(x=df[x],
-                           y=df[y],
+        trazo = go.Scatter(x=dataframe[x],
+                           y=dataframe[y],
                            name=name,
                            line=dict(color=color, width=width, dash='dot'),
                            connectgaps=False)
     else:
-        trazo = go.Scatter(x=df[x],
-                           y=df[y],
+        trazo = go.Scatter(x=dataframe[x],
+                           y=dataframe[y],
                            name=name,
                            line=dict(color=color, width=width),
                            connectgaps=False)
@@ -172,7 +201,7 @@ data_lineas = data_lineas_a + etiqueta_valor_actual
 
 shapes = rectangulos(maximo, fecha_actual, inicio_rango, fecha_max)
 
-layout_lineas = go.Layout(title={'text': 'Pronóstico hora a hora',
+layout_lineas = go.Layout(title={'text': '<b>Pronóstico hora a hora</b>',
                                  'font': {'family': 'Avenir LT Std 55 Roman',
                                           'size': 15,
                                           'color': '#282828'},
@@ -231,11 +260,7 @@ valores_celdas = [['Buena', 'Regular', 'Mala', 'Muy mala', 'Extremadamente mala'
 lista_colores = ['#99ca3a', '#f7ec0f', '#f8991d', '#ed2124', '#7d287d', '#7e0230']
 lista_colores_opacos = ['#cce29a', '#fbf4a3', '#ffc98b', '#f59678', '#b087b1', '#c77f93']
 colores_columnas = [lista_colores, lista_colores_opacos]
-# color_texto_1 = ['black', 'black']
-# color_texto_2 = ['white', 'black']
-# colores = color_texto_1 + color_texto_2
-
-color_texto = [['white' if v=='Muy mala' or v=='Extremadamente mala' or v=='Peligrosa'
+color_texto = [['white' if v == 'Muy mala' or v == 'Extremadamente mala' or v == 'Peligrosa'
                 else 'black' for v in valores_celdas[0]], 'black']
 
 data_tabla = go.Table(header={'values': valores_header,
@@ -251,7 +276,6 @@ data_tabla = go.Table(header={'values': valores_header,
                              'font': {'family': 'Avenir LT Std 55 Roman',
                                       'size': 10,
                                       'color': color_texto},
-                                      # 'color': '#282828'},
                              'align': 'left',
                              'fill': {'color': colores_columnas},
                              'line': {'color': '#f5f5f5',

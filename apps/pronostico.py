@@ -112,7 +112,10 @@ maximo_mapa = max(geodf['O3_anual_f'])
 
 def escala_mapa(valor_maximo):
     colorscale = []
-    if valor_maximo <= 100:
+    if valor_maximo <= 50:
+        colorscale = [[0.0, '#99ca3a'],
+                      [1.0, '#99ca3a']]
+    if 50 < valor_maximo <= 100:
         colorscale = [[0.0, '#99ca3a'],
                       [1.0, '#f7ec0f']]
     if 100 < valor_maximo <= 150:

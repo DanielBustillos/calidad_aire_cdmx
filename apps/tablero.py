@@ -4,16 +4,17 @@
 una tabla con las consecuencias de la exposición a la contaminación de acuerdo al índice de calidad del aire. Una
 serie de tiempo (gráfica de líneas) que muestra el índice de calidad del aire desde 4 días antes de la fecha actual
 hasta el pronóstico a 24 horas. También hay un mapa que indica la posición geográfica de las estaciones que miden las
-concentraciones de los contaminantes, y se muestra el índice de calidad del aire máximo entre todos los contaminantes
-que mide la estación.
+concentraciones de los contaminantes y los contaminantes que miden.
 """
 
-import geopandas as gpd
+# import geopandas as gpd
+import pandas as pd
 import re
 import dash_core_components as dcc
 import dash_html_components as html
 import json
 import plotly.graph_objects as go
+import plotly.express as px
 import locale
 
 from datetime import timedelta
@@ -84,87 +85,87 @@ contaminante_pronostico, valor_indice_pronostico = no_operar_nan(o3_pronostico, 
 color_actual, color_actual_opaco, leyenda_actual = color_leyenda_calidad_aire(valor_indice)
 color_pronostico, color_pronostico_opaco, leyenda_pronostico = color_leyenda_calidad_aire(valor_indice_pronostico)
 
-# -----------------------------------------MAPA DE CONTAMINACIÓN POR AGEB---------------------------------------------#
+# ---------------------------------------------MAPA DE ESTACIONES-------------------------------------------------#
 # Esto se realizó con datos viejos, para poder mostrar un demo en el tablero
 
-with open('data/o3_ageb.json') as geofile:
-    jfile = json.load(geofile)
-
-geodf = gpd.read_file('data/O3_ageb.shp')
-
-
-# Revisar la estructura del geojson y corregirla de ser necesario
-def check_geojson(j_file):
-    if 'id' not in j_file['features'][0].keys():
-        if 'properties' in j_file['features'][0].keys():
-            if 'id' in j_file['features'][0]['properties'] and j_file['features'][0]['properties']['id'] is not None:
-                for k, feat in enumerate(j_file['features']):
-                    j_file['features'][k]['id'] = feat['properties']['id']
-            else:
-                for k in range(len(j_file['features'])):
-                    j_file['features'][k]['id'] = k
-    return j_file
-
-
-# Revisar el geofile
-jdata = check_geojson(jfile)
-
-# Establecer las variables de contaminación
-z = geodf.O3_anual_f
-
-# Definir escala de colores del mapa
-
-maximo_mapa = max(geodf['O3_anual_f'])
-
-
-def escala_mapa(valor_maximo):
-    colorscale = []
-    if valor_maximo <= 50:
-        colorscale = [[0.0, '#99ca3a'],
-                      [1.0, '#99ca3a']]
-    if 50 < valor_maximo <= 100:
-        colorscale = [[0.0, '#99ca3a'],
-                      [1.0, '#f7ec0f']]
-    if 100 < valor_maximo <= 150:
-        colorscale = [[0.0, '#99ca3a'],
-                      [0.5, '#f7ec0f'],
-                      [1.0, '#f8991d']]
-    if 150 < valor_maximo <= 200:
-        colorscale = [[0.0, '#99ca3a'],
-                      [3.25, '#f7ec0f'],
-                      [6.5, '#f8991d'],
-                      [1.0, '#ed2124']]
-    if 200 < valor_maximo <= 300:
-        colorscale = [[0.0, '#99ca3a'],
-                      [2.5, '#f7ec0f'],
-                      [5.0, '#f8991d'],
-                      [7.5, '#ed2124'],
-                      [1.0, '#7d287d']]
-    if 300 < valor_maximo <= 500:
-        colorscale = [[0.0, '#99ca3a'],
-                      [0.2, '#f7ec0f'],
-                      [0.4, '#f8991d'],
-                      [0.6, '#ed2124'],
-                      [0.8, '#7d287d'],
-                      [1.0, '#7e0230']]
-    return colorscale
-
-
-colorscale_mapa = escala_mapa(maximo_mapa)
+# with open('data/o3_ageb.json') as geofile:
+#     jfile = json.load(geofile)
+#
+# geodf = gpd.read_file('data/O3_ageb.shp')
+#
+#
+# # Revisar la estructura del geojson y corregirla de ser necesario
+# def check_geojson(j_file):
+#     if 'id' not in j_file['features'][0].keys():
+#         if 'properties' in j_file['features'][0].keys():
+#             if 'id' in j_file['features'][0]['properties'] and j_file['features'][0]['properties']['id'] is not None:
+#                 for k, feat in enumerate(j_file['features']):
+#                     j_file['features'][k]['id'] = feat['properties']['id']
+#             else:
+#                 for k in range(len(j_file['features'])):
+#                     j_file['features'][k]['id'] = k
+#     return j_file
+#
+#
+# # Revisar el geofile
+# jdata = check_geojson(jfile)
+#
+# # Establecer las variables de contaminación
+# z = geodf.O3_anual_f
+#
+# # Definir escala de colores del mapa
+#
+# maximo_mapa = max(geodf['O3_anual_f'])
+#
+#
+# def escala_mapa(valor_maximo):
+#     colorscale = []
+#     if valor_maximo <= 50:
+#         colorscale = [[0.0, '#99ca3a'],
+#                       [1.0, '#99ca3a']]
+#     if 50 < valor_maximo <= 100:
+#         colorscale = [[0.0, '#99ca3a'],
+#                       [1.0, '#f7ec0f']]
+#     if 100 < valor_maximo <= 150:
+#         colorscale = [[0.0, '#99ca3a'],
+#                       [0.5, '#f7ec0f'],
+#                       [1.0, '#f8991d']]
+#     if 150 < valor_maximo <= 200:
+#         colorscale = [[0.0, '#99ca3a'],
+#                       [3.25, '#f7ec0f'],
+#                       [6.5, '#f8991d'],
+#                       [1.0, '#ed2124']]
+#     if 200 < valor_maximo <= 300:
+#         colorscale = [[0.0, '#99ca3a'],
+#                       [2.5, '#f7ec0f'],
+#                       [5.0, '#f8991d'],
+#                       [7.5, '#ed2124'],
+#                       [1.0, '#7d287d']]
+#     if 300 < valor_maximo <= 500:
+#         colorscale = [[0.0, '#99ca3a'],
+#                       [0.2, '#f7ec0f'],
+#                       [0.4, '#f8991d'],
+#                       [0.6, '#ed2124'],
+#                       [0.8, '#7d287d'],
+#                       [1.0, '#7e0230']]
+#     return colorscale
+#
+#
+# colorscale_mapa = escala_mapa(maximo_mapa)
 
 # Graficar mapa
-data_mapa = go.Choroplethmapbox(z=z,
-                                locations=geodf.id,
-                                colorscale=colorscale_mapa,
-                                colorbar={'thicknessmode': 'pixels',
-                                          'thickness': 7,
-                                          'outlinecolor': 'white',
-                                          'title': {'text': 'indice',
-                                                    'side': 'bottom'}},
-                                geojson=jdata,
-                                hoverinfo='all',
-                                marker_line_width=0.1,
-                                marker_opacity=0.5)
+
+df_estaciones = pd.read_csv('data/df_estaciones.csv')
+
+# claves = df_estaciones['Clave']
+nombres = df_estaciones['Nombre']
+parametros = df_estaciones['Parámetros']
+
+
+data_mapa = go.Scattermapbox(lat=df_estaciones['Latitud'],
+                             lon=df_estaciones['Longitud'],
+                             # name=claves,
+                             text=[nombres, parametros])
 
 layout_mapa = go.Layout(title_x=0.5,
                         autosize=True,

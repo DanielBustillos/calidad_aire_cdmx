@@ -40,19 +40,19 @@ def dic_colores():
                     'indice_pronostico_hist_O3': '#fc9882'}
     return dic_colores
 
-def colores_(ca):
-    if ca == 'Buena':
-        return '#99ca3a'
-    if ca == 'Regular':
-        return '#f7ec0f'
-    if ca == 'Mala':
-        return '#f8991d'
-    if ca == 'Muy mala':
-        return '#ed2124'
-    if ca == 'Extremadamente mala':
-        return '#7d287d'
-    if ca == 'Peligrosa':
-        return '#7e0023'
+# def colores_(ca):colo
+#     if ca == 'Buena':
+#         return '#99ca3a'
+#     if ca == 'Regular':
+#         return '#f7ec0f'
+#     if ca == 'Mala':
+#         return '#f8991d'
+#     if ca == 'Muy mala':
+#         return '#ed2124'
+#     if ca == 'Extremadamente mala':
+#         return '#7d287d'
+#     if ca == 'Peligrosa':
+#         return '#7e0023'
 
 def color_leyenda_calidad_aire(vi):
     color = ''

@@ -1,14 +1,11 @@
 # _*_ coding: utf-8 _*_
 
-"""Layout del tablero de calidad del aire.
-
-Este script construye el layout de la aplicación web del tablero de calidad del aire. Esta construido usando la
-biblioteca de python DASH.
-
-Hay dos aspectos fundamentales para construir esta aplicación web. Primeramente el usar un script de html (dentro de
-este script de python) para poder costumizar algunos aspectos visuales de la misma (como el favicon). En segundo plano
-el llamar a dos distintos módulos (concentraciones.py y pronóstico.py) para mostrar a demanda aspectos diferentes del
-tablero.
+"""Layout del tablero de calidad del aire. Se muestra un índice que indica el pronóstico de calidad del aire a 24 hrs,
+una tabla con las consecuencias de la exposición a la contaminación de acuerdo al índice de calidad del aire. Una
+serie de tiempo (gráfica de líneas) que muestra el índice de calidad del aire desde 4 días antes de la fecha actual
+hasta el pronóstico a 24 horas. También hay un mapa que indica la posición geográfica de las estaciones que miden las
+concentraciones de los contaminantes, y se muestra el índice de calidad del aire máximo entre todos los contaminantes
+que mide la estación.
 """
 
 import geopandas as gpd
@@ -21,9 +18,8 @@ import locale
 
 from datetime import timedelta
 
-# Funciones y datos necesarios
-from common.conversion_indice import indice_O3, indice_PM10, convertir_ppm, no_operar_nan
-from common.diccionarios import dic_etiquetas, dic_colores, color_leyenda_calidad_aire, rectangulos
+# Funciones, diccionarios y datos necesarios
+from common.helpers import indice_O3, indice_PM10, convertir_ppm, no_operar_nan, dic_colores, dic_etiquetas, color_leyenda_calidad_aire, rectangulos
 from data.db_conexion import df
 
 # -----------------------------------------ESTRUCTURACIÓN DEL DATAFRAME------------------------------------------------#

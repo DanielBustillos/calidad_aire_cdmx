@@ -16,7 +16,7 @@ import dash
 import dash_html_components as html
 
 from dash.dependencies import Input, Output
-from apps import concentraciones, pronostico
+from apps import documentacion, tablero
 
 # Se inicia a app en dash
 app = dash.Dash(__name__)
@@ -79,13 +79,13 @@ app.layout = html.Div([html.Header([html.Div([html.Button([html.Div(className='b
                Input('documentacion_button', 'n_clicks_timestamp')])
 def on_click(one, two, three):
     if one > two and one > three:
-        return pronostico.layout
+        return tablero.layout
     elif two > one and two > three:
-        return concentraciones.layout
+        return documentacion.layout
     elif three > two and three > one:
-        return pronostico.layout
+        return tablero.layout
     else:
-        return pronostico.layout
+        return tablero.layout
 
 
 if __name__ == '__main__':

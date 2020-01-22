@@ -92,11 +92,12 @@ df_estaciones = pd.read_csv('data/df_estaciones.csv')
 nombres = df_estaciones['Nombre']
 parametros = df_estaciones['Parámetros']
 
-
 data_mapa = go.Scattermapbox(lat=df_estaciones['Latitud'],
                              lon=df_estaciones['Longitud'],
                              # name=claves,
-                             text=[nombres, parametros])
+                             hovertext=nombres + parametros,
+                             hoverinfo='nombres'+'parametros')
+                             #text=[nombres, parametros])
 
 layout_mapa = go.Layout(title_x=0.5,
                         autosize=True,

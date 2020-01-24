@@ -89,15 +89,15 @@ color_pronostico, color_pronostico_opaco, leyenda_pronostico = color_leyenda_cal
 df_estaciones = pd.read_csv('data/df_estaciones.csv')
 
 # claves = df_estaciones['Clave']
-nombres = df_estaciones['Nombre']
+nombres = df_estaciones['Nombre'].to_list()
 parametros = df_estaciones['Parámetros']
 
 data_mapa = go.Scattermapbox(lat=df_estaciones['Latitud'],
                              lon=df_estaciones['Longitud'],
                              text=nombres,
-                             hoverinfo='text',
+                             hovertemplate= '<b>Estación: </b>%{text}',
                              #hovertext=nombres + parametros,
-                             marker={'color': 'orange',
+                             marker={'color': '#00e6e6',
                                      'size': 9},
                              )
 

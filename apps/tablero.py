@@ -94,16 +94,17 @@ parametros = df_estaciones['Parámetros']
 
 data_mapa = go.Scattermapbox(lat=df_estaciones['Latitud'],
                              lon=df_estaciones['Longitud'],
-                             # name=claves,
-                             hovertext=nombres + parametros,
+                             text=nombres,
+                             hoverinfo='text',
+                             #hovertext=nombres + parametros,
                              marker={'color': 'orange',
-                                     'size': 10})
-                             #text=[nombres, parametros])
+                                     'size': 9},
+                             )
 
 layout_mapa = go.Layout(title_x=0.5,
                         autosize=True,
-                        mapbox={'center': {'lat': 19.570748,
-                                           'lon': -99.001486},
+                        mapbox={'center': {'lat': 19.429071,
+                                           'lon': -99.131924},
                                 'style': 'carto-positron',
                                 'zoom': 9.1},
                         margin={'l': 0,

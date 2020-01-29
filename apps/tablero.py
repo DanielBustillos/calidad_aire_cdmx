@@ -101,7 +101,11 @@ data_mapa = go.Scattermapbox(lat=df_estaciones['Latitud'],
                                      'size': 9},
                              )
 
-layout_mapa = go.Layout(title_x=0.5,
+layout_mapa = go.Layout(title_x=0,
+                        title={'text':'Estaciones de monitoreo',
+                               'font': {'family': 'Avenir LT Std 55 Roman',
+                                        'size': 13,
+                                        'color': '#282828'}},
                         autosize=True,
                         mapbox={'center': {'lat': 19.429071,
                                            'lon': -99.131924},
@@ -109,8 +113,8 @@ layout_mapa = go.Layout(title_x=0.5,
                                 'zoom': 8},
                         margin={'l': 0,
                                 'r': 0,
-                                't': 0,
-                                'b': 30})
+                                't': 35,
+                                'b': 20})
 
 figure_mapa = go.Figure(data=data_mapa,
                         layout=layout_mapa)

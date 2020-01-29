@@ -127,9 +127,9 @@ header .logo {
 .contenedor-pronostico {
     height: calc(100vh - 50px);
     display: grid;
-    grid-template-columns: 15% 62% 23%;
-    grid-template-rows: 45% 55%;
-    grid-template-areas: 'indicador tabla mapa' 'lineas lineas lineas';
+    grid-template-columns: 15% 60% 25%;
+    grid-template-rows: 50% 50%;
+    grid-template-areas: 'indicador-actual tabla mapa' 'indicador lineas lineas';
 }
 
 .contenedor-concentraciones {
@@ -174,7 +174,7 @@ header .logo {
     grid-area: lineas;
 }
 
-/******************************************BIG NUMBER**********************************************/
+/******************************************BIG NUMBER PRONÓSTICO**********************************************/
 .mini_container-grid-2 {
     margin-top: 5px;
     margin-left: 10px;
@@ -216,6 +216,52 @@ header .logo {
 }
 
 .fecha-pronostico {
+    padding-left: 10px;
+    font-size: 18px;
+}
+
+/******************************************BIG NUMBER ACTUAL**********************************************/
+.mini_container-grid-3 {
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    position: relative;
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px lightgrey;
+    grid-area: indicador-actual;
+}
+
+.actual {
+    font-size: 18px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.valor-indice-actual {
+    font-size: 100px;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 15px;
+    margin: 0;
+}
+
+.leyenda-indice-actual {
+    font-size: 40px;
+    text-align: left;
+    padding-left: 10px;
+    margin: 0;
+    padding-top: 0;
+}
+
+.parrafo-indice-actual {
+    font-size: 22px;
+    margin: 0;
+    padding-left: 10px;
+    padding-top: 0;
+}
+
+.fecha-actual {
     padding-left: 10px;
     font-size: 18px;
 }

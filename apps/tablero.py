@@ -72,6 +72,8 @@ maximo = max(maximo_columna[1], maximo_columna[2], maximo_columna[3], maximo_col
 # Fechas formateadas a string
 big_number_fecha_pronostico = fecha_max.strftime('%d/%b/%y')
 big_number_hora_pronostico = fecha_max.strftime('%H:%M hrs')
+big_number_fecha_actual = fecha_actual.strftime('%d/%b/%y')
+big_number_hora_actual = fecha_actual.strftime('%H:%M hrs')
 
 # Valores de índice actual (fecha_actual) y de pronóstico (fecha_max)
 o3_actual = df.loc[df['fecha'] == fecha_actual, 'indice_O3'].iloc[0]
@@ -266,6 +268,22 @@ estilo_graficas = {'responsive': True,
 #      dcc.Graph(id='indices', figure=figure_lineas, animate=True, className='indices', config=estilo_graficas)],
 # className='contenedor-pronostico')
 
+# layout = html.Div(
+#     [html.Div([html.P('pronóstico', id='pronostico', className='pronostico'),
+#                html.P(valor_indice_pronostico, id='valor-indice-pronostico', className='valor-indice-pronostico'),
+#                html.P(leyenda_pronostico, id='leyenda-indice-pronostico', className='leyenda-indice-pronostico'),
+#                html.P('por ' + contaminante_pronostico,
+#                       id='parrafo-indice-pronostico', className='parrafo-indice-pronostico'),
+#                html.P(big_number_fecha_pronostico + '  ' + big_number_hora_pronostico, id='fecha-pronostico',
+#                       className='fecha-pronostico')],
+#               id='indicador', className='mini_container-grid-2', style={'background-color': color_pronostico}),
+#      html.Div(dcc.Graph(id='tabla', figure=figure_tabla, className='tabla'),
+#               id='tabla-container', className='tabla-container'),
+#      html.Div(dcc.Graph(figure=figure_mapa, id='mapa', className='mapa', config=estilo_graficas),
+#               id='mapa-container', className='mapa-container'),
+#      dcc.Graph(id='indices', figure=figure_lineas, animate=True, className='indices', config=estilo_graficas)],
+# className='contenedor-pronostico')
+
 layout = html.Div(
     [html.Div([html.P('pronóstico', id='pronostico', className='pronostico'),
                html.P(valor_indice_pronostico, id='valor-indice-pronostico', className='valor-indice-pronostico'),
@@ -275,6 +293,13 @@ layout = html.Div(
                html.P(big_number_fecha_pronostico + '  ' + big_number_hora_pronostico, id='fecha-pronostico',
                       className='fecha-pronostico')],
               id='indicador', className='mini_container-grid-2', style={'background-color': color_pronostico}),
+     html.Div([html.P('ahora', id='actual', className='actual'),
+               html.P(valor_indice, id='valor-indice-actual', className='valor-indice-actual'),
+               html.P(leyenda_actual, id='leyenda-indice-actual', className='leyenda-indice-actual'),
+               html.P('por ' + contaminante, id='parrafo-indice-actual', className='parrafo-indice-actual'),
+               html.P(big_number_fecha_actual + '  ' + big_number_hora_actual, id='fecha-actual',
+                      className='fecha-actual')],
+              id='indicador-actual', className='mini_container-grid-3', style={'background-color': color_actual}),
      html.Div(dcc.Graph(id='tabla', figure=figure_tabla, className='tabla'),
               id='tabla-container', className='tabla-container'),
      html.Div(dcc.Graph(figure=figure_mapa, id='mapa', className='mapa', config=estilo_graficas),

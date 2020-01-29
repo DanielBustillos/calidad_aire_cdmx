@@ -106,7 +106,7 @@ layout_mapa = go.Layout(title_x=0.5,
                         mapbox={'center': {'lat': 19.429071,
                                            'lon': -99.131924},
                                 'style': 'carto-positron',
-                                'zoom': 9.1},
+                                'zoom': 8},
                         margin={'l': 0,
                                 'r': 0,
                                 't': 0,
@@ -245,6 +245,22 @@ figure_tabla = {'data': [data_tabla],
 estilo_graficas = {'responsive': True,
                    'autosizable': True,
                    'displaylogo': False}
+
+# layout = html.Div(
+#     [html.Div([html.P('pronóstico', id='pronostico', className='pronostico'),
+#                html.P(valor_indice_pronostico, id='valor-indice-pronostico', className='valor-indice-pronostico'),
+#                html.P(leyenda_pronostico, id='leyenda-indice-pronostico', className='leyenda-indice-pronostico'),
+#                html.P('por ' + contaminante_pronostico,
+#                       id='parrafo-indice-pronostico', className='parrafo-indice-pronostico'),
+#                html.P(big_number_fecha_pronostico + '  ' + big_number_hora_pronostico, id='fecha-pronostico',
+#                       className='fecha-pronostico')],
+#               id='indicador', className='mini_container-grid-2', style={'background-color': color_pronostico}),
+#      html.Div(dcc.Graph(id='tabla', figure=figure_tabla, className='tabla'),
+#               id='tabla-container', className='tabla-container'),
+#      html.Div(dcc.Graph(figure=figure_mapa, id='mapa', className='mapa', config=estilo_graficas),
+#               id='mapa-container', className='mapa-container'),
+#      dcc.Graph(id='indices', figure=figure_lineas, animate=True, className='indices', config=estilo_graficas)],
+# className='contenedor-pronostico')
 
 layout = html.Div(
     [html.Div([html.P('pronóstico', id='pronostico', className='pronostico'),

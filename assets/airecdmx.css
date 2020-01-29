@@ -144,7 +144,7 @@ header .logo {
     margin-top: 0;
     margin-left: 0;
     margin-right: 0;
-    margin-bottom: 0;
+    margin-bottom: 10px;
     padding: 0;
     position: relative;
     grid-area: mapa;
@@ -153,7 +153,7 @@ header .logo {
 
 .mapa-graph {
     height: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     padding:0;
     position: relative;
     grid-area: mapa;

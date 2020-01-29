@@ -212,20 +212,21 @@ data_tabla = go.Table(header={'values': valores_header,
                               'height': 20,
                               'fill': {'color': '#f5f5f5'},
                               'font': {'family': 'Avenir LT Std 55 Roman',
-                                       'size': 10,
+                                       'size': 11,
                                        'color': 'black'},
                               'align': 'left',
                               'line': {'color': '#f5f5f5',
                                        'width': 1}},
                       cells={'values': valores_celdas,
                              'font': {'family': 'Avenir LT Std 55 Roman',
-                                      'size': 10,
+                                      'size': 11,
                                       'color': color_texto},
                              'align': 'left',
+                             'height': 35,
                              'fill': {'color': colores_columnas},
                              'line': {'color': '#f5f5f5',
                                       'width': 2}},
-                      columnwidth=[18, 9, 73])
+                      columnwidth=[15, 12, 73])
 
 layout_tabla = go.Layout(paper_bgcolor='#f5f5f5',
                          plot_bgcolor='#f5f5f5',
@@ -246,9 +247,7 @@ estilo_graficas = {'responsive': True,
                    'displaylogo': False}
 
 layout = html.Div(
-    [html.Div(dcc.Graph(figure=figure_mapa, id='mapa', className='mapa', config=estilo_graficas),
-              id='mapa-container', className='mapa-container'),
-     html.Div([html.P('pronóstico', id='pronostico', className='pronostico'),
+    [html.Div([html.P('pronóstico', id='pronostico', className='pronostico'),
                html.P(valor_indice_pronostico, id='valor-indice-pronostico', className='valor-indice-pronostico'),
                html.P(leyenda_pronostico, id='leyenda-indice-pronostico', className='leyenda-indice-pronostico'),
                html.P('por ' + contaminante_pronostico,
@@ -258,5 +257,7 @@ layout = html.Div(
               id='indicador', className='mini_container-grid-2', style={'background-color': color_pronostico}),
      html.Div(dcc.Graph(id='tabla', figure=figure_tabla, className='tabla'),
               id='tabla-container', className='tabla-container'),
+     html.Div(dcc.Graph(figure=figure_mapa, id='mapa', className='mapa', config=estilo_graficas),
+              id='mapa-container', className='mapa-container'),
      dcc.Graph(id='indices', figure=figure_lineas, animate=True, className='indices', config=estilo_graficas)],
-    className='contenedor-pronostico')
+className='contenedor-pronostico')

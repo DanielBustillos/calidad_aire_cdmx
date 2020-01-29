@@ -127,9 +127,9 @@ header .logo {
 .contenedor-pronostico {
     height: calc(100vh - 50px);
     display: grid;
-    grid-template-columns: 38% 15% 47%;
+    grid-template-columns: 15% 62% 23%;
     grid-template-rows: 45% 55%;
-    grid-template-areas: 'mapa indicador tabla' 'mapa lineas lineas';
+    grid-template-areas: 'indicador tabla mapa' 'lineas lineas lineas';
 }
 
 .contenedor-concentraciones {
@@ -222,7 +222,7 @@ header .logo {
 
 /************************************************TABLA********************************************/
 .tabla {
-    height: 90%;
+    height: 100%;
     position: relative;
     background-color: #f5f5f5;
 }
@@ -233,7 +233,7 @@ header .logo {
     margin-right: 10px;
     margin-bottom: 10px;
     padding: 5px;
-    position: relative;
+    position: center;
     border-radius: 20px;
     background-color: #f5f5f5;
     box-shadow: 2px 2px 2px lightgrey;

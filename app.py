@@ -59,10 +59,7 @@ app.layout = html.Div([html.Header([html.Div([html.Button([html.Div(className='b
                                                           id='myBtn', className='dropbtn'),
                                               html.Div([html.Button(html.Span('Pronóstico'), id='pronostico_button',
                                                                     n_clicks_timestamp=0, className='button'),
-                                                        html.Button(html.Span('Concentraciones'),
-                                                                    id='concentracion_button', n_clicks_timestamp=0,
-                                                                    className='button'),
-                                                        html.Button(html.Span('Documentación'),
+                                                        html.Button(html.Span('Conoce más'),
                                                                     id='documentacion_button', n_clicks_timestamp=0,
                                                                     className='button')], id='myDropdown',
                                                        className='dropdown-content')], className='dropdown'),
@@ -75,15 +72,12 @@ app.layout = html.Div([html.Header([html.Div([html.Button([html.Div(className='b
 
 @app.callback(Output('contenido', 'children'),
               [Input('pronostico_button', 'n_clicks_timestamp'),
-               Input('concentracion_button', 'n_clicks_timestamp'),
                Input('documentacion_button', 'n_clicks_timestamp')])
-def on_click(one, two, three):
-    if one > two and one > three:
+def on_click(one, two):
+    if one > two:
         return tablero.layout
-    elif two > one and two > three:
+    elif two > one:
         return documentacion.layout
-    elif three > two and three > one:
-        return tablero.layout
     else:
         return tablero.layout
 

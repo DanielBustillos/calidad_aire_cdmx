@@ -41,7 +41,15 @@ indice3 ='De acuerdo a la magnitud del índice de calidad del aire se clasifican
 indice4 ='La metodología del cálculo del índice de calidad del aire y mucha más información se puede encontrar en la ' \
          'página de la Secretaría del Medio Ambiente de la Ciudad de México\u00B2.'
 
-# pronostico1 =
+pronostico1 ='bla bla Dan'
+
+pronostico2 ='bla bla Dan'
+
+referencia1 = 'http://www.aire.cdmx.gob.mx/descargas/monitoreo/normatividad/NADF-009-AIRE-2017.pdf'
+
+referencia2 = 'https://www.sedema.cdmx.gob.mx/'
+#
+# referencia3 =
 
 # ------------------------------------------CONSTRUIR LAYOUT DE LA PÁGINA----------------------------------------------#
 
@@ -50,4 +58,12 @@ layout = html.Div(
                html.P(indice1),
                html.P(indice2),
                html.P(indice3),
-               html.P(indice4)], id='indice-container', className='indice-container')])
+               html.P(indice4)], id='documentacion-container', className='documentacion-container'),
+     html.Div([html.H3('Pronóstico de Calidad del Aire'),
+               html.P(pronostico1),
+               html.P(pronostico2)], id='documentacion-container', className='documentacion-container'),
+     html.Div([html.H4('Referencias'),
+               html.P(dcc.Link('Norma Ambiental para el Distrito Federal NADF-008-AMBT-2017', href=referencia1)),
+               html.P(dcc.Link('Secretaría del Medio Ambiente (SEDEMA)', href=referencia2))],
+              id='documentacion-container', className='documentacion-container')
+     ])

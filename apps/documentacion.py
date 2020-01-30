@@ -1,14 +1,8 @@
 # _*_ coding: utf-8 _*_
 
-"""Layout principal de la app de dash.
-
-Este script construye el layout de la aplicación web del tablero de calidad del aire. Esta construido usando la
-biblioteca de python DASH.
-
-Hay dos aspectos fundamentales para construir esta aplicación web. Primeramente el usar un script de html (dentro de
-este script de python) para poder costumizar algunos aspectos visuales de la misma (como el favicon). En segundo plano
-el llamar a dos distintos módulos (documentacion.py y pronóstico.py) para mostrar a demanda aspectos diferentes del
-tablero.
+"""Layout de la documentación para el público. Se da una breve explicación de la obtención del índice de calidad del
+aire y de las concentraciones de los principales contaminantes. Así mismo también se explica el proceso que determina
+el pronóstico de la calidad del aire en el Valle de México.
 """
 import dash_core_components as dcc
 import dash_html_components as html

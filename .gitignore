@@ -7,5 +7,6 @@ calidad_aire_cdmx/script/
 __pycache__/
 airecdmx/
 apps/tablero_mapa_ageb.py
+apps/concentraciones.py
 data/
 mapa/

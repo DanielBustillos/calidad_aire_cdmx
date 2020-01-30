@@ -289,3 +289,19 @@ header .logo {
 .svg-container {
     z-index: 1;
 }
+
+/*****************************************DOCUMENTACION INDICE CONTAINER********************************************/
+
+.indice-container {
+    margin-top: 5px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    padding: 25px;
+    position: center;
+    border-radius: 20px;
+    background-color: #f5f5f5;
+    box-shadow: 2px 2px 2px lightgrey;
+    grid-area: tabla;
+}

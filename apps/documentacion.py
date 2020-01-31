@@ -58,12 +58,12 @@ layout = html.Div(
                html.P(indice1),
                html.P(indice2),
                html.P(indice3),
-               html.P(indice4)], id='documentacion-container', className='documentacion-container'),
+               html.P(indice4)], id='mini-documentacion-container', className='mini-documentacion-container'),
      html.Div([html.H3('Pronóstico de Calidad del Aire'),
                html.P(pronostico1),
-               html.P(pronostico2)], id='documentacion-container', className='documentacion-container'),
+               html.P(pronostico2)], id='mini-documentacion-container', className='mini-documentacion-container'),
      html.Div([html.H4('Referencias'),
                html.P(dcc.Link('Norma Ambiental para el Distrito Federal NADF-008-AMBT-2017', href=referencia1)),
                html.P(dcc.Link('Secretaría del Medio Ambiente (SEDEMA)', href=referencia2))],
-              id='documentacion-container', className='documentacion-container')
-     ])
+              id='mini-documentacion-container', className='mini-documentacion-container')
+     ], id='contenedor-documentacion', className='contenedor-documentacion')

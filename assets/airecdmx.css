@@ -138,6 +138,12 @@ header .logo {
     display: grid;
 }
 
+.contenedor-documentacion {
+    /*z-index: -1;*/
+    height: calc(100vh - 95px);
+    /*display: grid;*/
+}
+
 /*********************************************MAPA*******************************************/
 .mapa-container {
     height: 100%;
@@ -292,7 +298,13 @@ header .logo {
 
 /*****************************************DOCUMENTACION INDICE CONTAINER********************************************/
 
-.documentacion-container {
+.documentacion {
+    height: 100%;
+    position: relative;
+    background-color: #f5f5f5;
+}
+
+.mini-documentacion-container {
     margin-top: 5px;
     margin-left: 30px;
     margin-right: 30px;
@@ -303,5 +315,5 @@ header .logo {
     border-radius: 20px;
     background-color: #f5f5f5;
     box-shadow: 2px 2px 2px lightgrey;
-    grid-area: tabla;
+    grid-area: documentacion;
 }

@@ -132,16 +132,8 @@ header .logo {
     grid-template-areas: 'indicador-actual tabla mapa' 'indicador lineas lineas';
 }
 
-.contenedor-concentraciones {
-    z-index: -1;
-    height: calc(100vh - 95px);
-    display: grid;
-}
-
 .contenedor-documentacion {
-    /*z-index: -1;*/
     height: calc(100vh - 95px);
-    /*display: grid;*/
 }
 
 /*********************************************MAPA*******************************************/

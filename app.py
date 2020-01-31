@@ -16,7 +16,7 @@ import dash
 import dash_html_components as html
 
 from dash.dependencies import Input, Output
-from apps import documentacion, tablero, concentraciones
+from apps import documentacion, tablero
 
 # Se inicia a app en dash
 app = dash.Dash(__name__)
@@ -59,9 +59,6 @@ app.layout = html.Div([html.Header([html.Div([html.Button([html.Div(className='b
                                                           id='myBtn', className='dropbtn'),
                                               html.Div([html.Button(html.Span('Pronóstico'), id='pronostico_button',
                                                                     n_clicks_timestamp=0, className='button'),
-                                                        html.Button(html.Span('Concentraciones'),
-                                                                    id='concentraciones_button', n_clicks_timestamp=0,
-                                                                    className='button'),
                                                         html.Button(html.Span('Conoce más'),
                                                                     id='documentacion_button', n_clicks_timestamp=0,
                                                                     className='button')], id='myDropdown',
@@ -75,14 +72,11 @@ app.layout = html.Div([html.Header([html.Div([html.Button([html.Div(className='b
 
 @app.callback(Output('contenido', 'children'),
               [Input('pronostico_button', 'n_clicks_timestamp'),
-               Input('concentraciones_button', 'n_clicks_timestamp'),
                Input('documentacion_button', 'n_clicks_timestamp')])
-def on_click(one, two, three):
-    if one>two and one>three:
+def on_click(one, two):
+    if one>two:
         return tablero.layout
-    elif two>one and two>three:
-        return concentraciones.layout
-    elif three>two and three>one:
+    elif two>one:
         return documentacion.layout
     else:
         return tablero.layout

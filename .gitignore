@@ -3,6 +3,8 @@ calidad_aire_cdmx/__pycache__/
 calidad_aire_cdmx/apps/__pycache__/
 calidad_aire_cdmx/common/__pycache__/
 calidad_aire_cdmx/script/
+venv
+venv/
 .idea
 __pycache__/
 airecdmx/

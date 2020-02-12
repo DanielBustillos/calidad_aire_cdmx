@@ -25,7 +25,7 @@ indice1 ='Los contaminantes atmosféricos son toda sustancia que al entrar en co
          'ozono, monóxido de carbono, dióxido de nitrógeno y dióxido de azufre, la concentración está dada en ' \
          'partes por millón (ppm), mientras que para las partículas suspendidas está dada en microgramos ' \
          'por metro cúbico (\u03BCg/m\u00B3). Los métodos por los cuales se hacen estas mediciones están descritos ' \
-         'en las Normas oficiales Mexicanas\u00b9.'
+         'en las Normas Oficiales Mexicanas\u00b9.'
 
 indice2 ='Según las mismas normas oficiales, el índice de calidad del aire se calcula de acuerdo al contaminante ' \
          'criterio. Para el ozono y el dióxido de nitrógeno se usan las concentraciones promedio de una hora; para ' \
@@ -41,15 +41,19 @@ indice3 ='De acuerdo a la magnitud del índice de calidad del aire se clasifican
 indice4 ='La metodología del cálculo del índice de calidad del aire y mucha más información se puede encontrar en la ' \
          'página de la Secretaría del Medio Ambiente de la Ciudad de México\u00B2.'
 
-pronostico1 ='bla bla Dan'
+pronostico1 ='El nivel de contaminación depende de muchos factores que hacen que su pronóstico sea un tema de ' \
+             'investigación actual. Continuamente se mejoran los modelos de pronóstico por diferentes factores, desde ' \
+             'la mejora de los sensores metereológicos hasta la implementación de novedosas técnicas que permiten ' \
+             'comprender el fenómeno de una mejor manera.'
 
-pronostico2 ='bla bla Dan'
+pronostico2 ='Una de las nuevas técnicas para estimar la calidad del aire, es el aprendizaje de máquina (machine ' \
+             'learning) el cual emplea datos históricos como temperatura, humedad y concentración de los contaminantes, ' \
+             'entre otros, para encontrar las relaciones entre éstos y así generar un modelo predictivo a partir de ' \
+             'los mismos.'
 
 referencia1 = 'http://www.aire.cdmx.gob.mx/descargas/monitoreo/normatividad/NADF-009-AIRE-2017.pdf'
 
 referencia2 = 'https://www.sedema.cdmx.gob.mx/'
-#
-# referencia3 =
 
 # ------------------------------------------CONSTRUIR LAYOUT DE LA PÁGINA----------------------------------------------#
 
@@ -63,7 +67,7 @@ layout = html.Div(
                html.P(pronostico1),
                html.P(pronostico2)], id='mini-documentacion-container', className='mini-documentacion-container'),
      html.Div([html.H4('Referencias'),
-               html.P(dcc.Link('Norma Ambiental para el Distrito Federal NADF-008-AMBT-2017', href=referencia1)),
-               html.P(dcc.Link('Secretaría del Medio Ambiente (SEDEMA)', href=referencia2))],
+               html.P([dcc.Link('1. Norma Ambiental para el Distrito Federal NADF-008-AMBT-2017', href=referencia1)]),
+               html.P(dcc.Link('2. Secretaría del Medio Ambiente (SEDEMA)', href=referencia2))],
               id='mini-documentacion-container', className='mini-documentacion-container')
      ], id='contenedor-documentacion', className='contenedor-documentacion')

@@ -4,7 +4,7 @@ la Coordinación de Repositorios, Investigación y Prospectiva (CRIP) del Consej
 Nacional de Ciencia y Tecnología (CONACyT).
 
 Este proyecto es para informar a la población del Valle de México de una 
-manera amigable y directa acerca del estado de la calidad del aire en el mismo. Consta 
+manera amigable y directa acerca del estado de la calidad del aire en el mismo. Consiste 
 de un tablero que muestra el estado actual del índice de calidad del aire, y que se
 actualiza hora a hora. El índice se obtiene a partir de los datos compartidos
 por la Secretaría del Medio Ambiente (SEDEMA) del Gobierno de la Ciudad de México y 
